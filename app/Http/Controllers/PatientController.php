@@ -64,7 +64,17 @@ class PatientController extends Controller
      */
     public function update(Request $request, Patient $patient)
     {
-        //
+        $validatedData = $request->validated();
+
+        $patient->update($validatedData);
+
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo')->store('public/photos');
+            $patient->photo = $photo;
+            $patient->save();
+        }
+
+        return response()->json($patient, 200);
     }
 
     /**
