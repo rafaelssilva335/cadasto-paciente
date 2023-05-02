@@ -11,7 +11,7 @@ class StorePatientRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,7 +25,7 @@ class StorePatientRequest extends FormRequest
             'name' => 'required',
             'mother_name' => 'required',
             'birthdate' => 'required|date',
-            'cpf' => 'required|unique:patients|cpf',
+            'cpf' => 'required|unique:patients',
             'cns' => 'required|unique:patients',
             'photo' => 'nullable|image|max:2048',
         ];

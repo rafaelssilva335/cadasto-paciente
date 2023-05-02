@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Models\Patient;
 use Illuminate\Http\Request;
+use App\Http\Requests\StorePatientRequest;
 
 class PatientController extends Controller
 {
@@ -12,7 +14,9 @@ class PatientController extends Controller
      */
     public function index()
     {
-        //
+        $patients = Patient::all();
+    
+        return response()->json($patients);
     }
 
     /**
@@ -26,7 +30,7 @@ class PatientController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePatientRequest $request)
     {
         $validatedData = $request->validated();
 
@@ -48,7 +52,7 @@ class PatientController extends Controller
      */
     public function show(Patient $patient)
     {
-        //
+        return response()->json($patient);
     }
 
     /**
@@ -82,6 +86,8 @@ class PatientController extends Controller
      */
     public function destroy(Patient $patient)
     {
-        //
+        $patient->delete();
+
+        return response()->json(['message' => 'Patient deleted successfully']);
     }
 }
