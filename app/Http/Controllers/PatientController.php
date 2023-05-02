@@ -28,7 +28,29 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $rules = [
+            'name' => 'required',
+            'mother_name' => 'required',
+            'birthdate' => 'required|date',
+            'cpf' => 'required|unique:patients|cpf',
+            'cns' => 'required|unique:patients',
+            'photo' => 'nullable|image|max:2048',
+        ];
+
+        $validatedData = $request->validated();
+
+        $patient = new Patient;
+        $patient->fill($validatedData);
+
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo')->store('public/photos');
+            $patient->photo = $photo;
+        }
+
+        $patient->save();
+
+        return response()->json($patient, 201);
     }
 
     /**
