@@ -10,4 +10,9 @@ class Address extends Model
     use HasFactory;
     
     protected $fillable = ['cep', 'logradouro', 'complemento', 'bairro', 'localidade', 'uf'];
+
+    public function address()
+    {
+        return $this->belongsTo(Address::class);
+    }
 }
