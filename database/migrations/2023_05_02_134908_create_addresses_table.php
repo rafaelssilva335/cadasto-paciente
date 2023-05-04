@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('logradouro');
             $table->string('complemento')->nullable();
             $table->string('bairro');
-            $table->string('localidade');
             $table->string('uf');
             $table->timestamps();
         });
