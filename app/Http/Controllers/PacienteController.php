@@ -17,7 +17,7 @@ class PacienteController extends Controller
     }
     public function create()
     {
-        return Inertia::render('Pacientes/Home', [
+        return Inertia::render('Pacientes/Create', [
             'baseUrl' => url('/')
         ]);
     }

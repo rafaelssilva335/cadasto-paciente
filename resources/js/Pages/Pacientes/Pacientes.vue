@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col w-full h-full">
     <div class="flex flex-row justify-between bg-gray-200 p-4">
-      <h2 class="text-2xl font-bold">Lista de Pacientes</h2>
+      <h2 class="text-2xl font-bold">Home</h2>
       <a href="/pacientes/create" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
         Novo Paciente
       </a>
@@ -85,25 +85,16 @@ export default {
   methods: {
     async getPatients() {
       try {
-        const response = await axios.get(`http://localhost:8001/api/patients`)
+        const response = await axios.get(`${this.baseUrl}/api/patients`)
         if (response.data.erro) {
-          alert('CEP não encontrado!')
+          alert('Pacientes não encontrados!')
           return
         }
         this.patients = response.data
-        this.handleSubmit()
       } catch (error) {
         console.error(error)
-        alert('Erro ao consultar o ViaCEP!')
+        alert('Erro ao consultar o pacientes!')
       }
-    },
-    editPatient(patientId) {
-      // Lógica para editar paciente com o id especificado
-      console.log("Editar paciente com ID", patientId);
-    },
-    deletePatient(patientId) {
-      // Lógica para excluir paciente com o id especificado
-      console.log("Excluir paciente com ID", patientId);
     },
   },
 };

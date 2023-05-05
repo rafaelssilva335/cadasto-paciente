@@ -17,15 +17,15 @@
         <p v-if="errors.mother_name" class="text-red-500 text-xs italic">{{ errors.mother_name }}</p>
       </div>
       <div class="mb-4">
-        <label for="cpf" class="block text-gray-700 font-bold mb-2">CPF:</label>
-        <input v-model="cpf" type="text" id="cpf" name="cpf"
+        <label for="cpf" class="block text-gray-700 font-bold mb-2">1 CPF:</label>
+        <input v-mask="'###.###.###-##'" v-model="cpf" type="text" id="cpf" name="cpf"
           class="w-full border border-gray-400 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           required>
         <p v-if="errors.cpf" class="text-red-500 text-xs italic">{{ errors.cpf }}</p>
       </div>
       <div class="mb-4">
         <label for="cns" class="block text-gray-700 font-bold mb-2">CNS:</label>
-        <input v-model="cns" type="text" id="cns" name="cns"
+        <input v-mask="'###############'" v-model="cns" type="text" id="cns" name="cns"
           class="w-full border border-gray-400 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           required>
         <p v-if="errors.cns" class="text-red-500 text-xs italic">{{ errors.cns }}</p>
@@ -39,7 +39,7 @@
       </div>
       <div class="mb-4">
         <label class="block text-gray-700 font-bold mb-2">CEP:</label>
-        <input v-model="address.cep" type="text"
+        <input v-mask="'########'" v-model="address.cep" type="text"
           class="w-full border border-gray-400 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           required>
       </div>
@@ -87,11 +87,13 @@
 <script>
 import CreateAddress from '@/components/Address/Create.vue';
 import axios from 'axios';
+import {mask} from 'vue-the-mask'
 
 export default {
   components: {
     CreateAddress
   },
+  directives: {mask},
   data() {
     return {
       name: "",
@@ -125,7 +127,7 @@ export default {
         .then(response => {
           console.log(response)
           alert('Paciente cadastrado com sucesso!')
-          window.location.href = '/pacientes'
+          window.location.href = '/'
         })
         .catch(error => {
           console.error(error)
@@ -209,7 +211,6 @@ export default {
         this.address.bairro = response.data.bairro
         this.address.cidade = response.data.localidade
         this.address.uf = response.data.uf
-        this.handleSubmit()
       } catch (error) {
         console.error(error)
         alert('Erro ao consultar o ViaCEP!')

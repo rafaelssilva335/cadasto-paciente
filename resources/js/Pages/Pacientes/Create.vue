@@ -1,6 +1,13 @@
 <template>
-    <div class="p-4">
-        <CreatePaciente/>
+    <div class="flex flex-col w-full h-full">
+        <div class="flex flex-row justify-between bg-gray-200 p-4">
+            <h2 class="text-2xl font-bold"><a href="/">Lista de Pacientes</a></h2>
+            <a href="/pacientes/create" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+                Novo Paciente
+            </a>
+        </div>
+
+        <CreatePaciente />
     </div>
 </template>
   
@@ -44,7 +51,6 @@ export default {
                 });
         },
         handleSubmit() {
-            // Aqui você pode enviar os dados do endereço para a API do seu backend
             console.log('Endereço salvo com sucesso!');
         }
     }
