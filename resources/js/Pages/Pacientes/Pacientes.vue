@@ -58,8 +58,8 @@
                     <div class="text-sm text-gray-900">{{ paciente.cns }}</div>
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <router-link :to="'/pacientes/editar/' + paciente.id"
-                      class="text-indigo-600 hover:text-indigo-900">Editar</router-link>
+                    <a :href="`${this.baseUrl}/pacientes/edit/${paciente.id}`"
+                      class="text-indigo-600 hover:text-indigo-900">Editar</a>
                   </td>
                 </tr>
               </tbody>
@@ -76,6 +76,7 @@ export default {
   data() {
     return {
       patients: [],
+      baseUrl: this.$page.props.baseUrl
     };
   },
   mounted() {

@@ -11,7 +11,7 @@ class UpdatePatientRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -27,8 +27,8 @@ class UpdatePatientRequest extends FormRequest
             'name' => 'sometimes|required',
             'mother_name' => 'sometimes|required',
             'birthdate' => 'sometimes|required|date',
-            'cpf' => 'sometimes|required|unique:patients,cpf,' . $id,
-            'cns' => 'sometimes|required|unique:patients,cns,' . $id,
+            'cpf' => 'sometimes|required|unique:patients,id,' . $id,
+            'cns' => 'sometimes|required|unique:patients,id,' . $id,
             'photo' => 'nullable|image|max:2048',
         ];
     }

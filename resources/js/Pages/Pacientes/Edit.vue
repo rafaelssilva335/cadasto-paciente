@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col justify-center items-center">
     <form @submit.prevent="validateForm" class="w-full sm:w-2/3 md:w-1/2 lg:w-1/3 xl:w-1/4">
-      <h2 class="text-2xl font-bold mb-6">Cadastro de Paciente</h2>
+      <h2 class="text-2xl font-bold mb-6">Editar dados do Paciente</h2>
       <div class="mb-4">
         <label for="name" class="block text-gray-700 font-bold mb-2">Nome:</label>
         <input v-model="name" type="text" id="name" name="name"
@@ -78,7 +78,7 @@
       </div>
       <div class="flex justify-center">
         <button type="submit"
-          class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Salvar</button>
+          class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Editar</button>
       </div>
     </form>
   </div>
@@ -94,6 +94,7 @@ export default {
   },
   data() {
     return {
+      patientid: "",
       name: "",
       mother_name: "",
       cpf: "",
@@ -108,20 +109,22 @@ export default {
         uf: ''
       },
       errors: {},
-      baseUrl:this.$page.props.baseUrl
+      baseUrl: this.$page.props.baseUrl
     };
   },
+  mounted() {
+    this.getPatient()
+  },
   methods: {
-    handleSubmit() {
-      axios
-        .post(`${this.baseUrl}/api/patients`, {
-          name: this.name,
-          mother_name: this.mother_name,
-          cpf: this.cpf,
-          birthdate: this.birthdate,
-          address: this.address,
-          cns: this.cns
-        })
+    updatePatient() {
+      axios.put(`/api/patients/${this.patientid}`, {
+        name: this.name,
+        mother_name: this.mother_name,
+        cpf: this.cpf,
+        cns: this.cns,
+        birthdate: this.birthdate,
+        address: this.address
+      })
         .then(response => {
           console.log(response)
           alert('Paciente cadastrado com sucesso!')
@@ -131,6 +134,15 @@ export default {
           console.error(error)
           alert('Erro ao cadastrar o paciente!')
         })
+    },
+    getPatient() {
+        this.name = this.$page.props.patient.name
+        this.mother_name = this.$page.props.patient.mother_name
+        this.cpf = this.$page.props.patient.cpf
+        this.cns = this.$page.props.patient.cns
+        this.birthdate = this.$page.props.patient.birthdate
+        this.address = this.$page.props.patient.address
+        this.patientid = this.$page.props.patient.id
     },
     validateForm() {
       this.errors = {};
@@ -160,7 +172,7 @@ export default {
       }
 
       if (Object.keys(this.errors).length === 0) {
-        this.handleSubmit();
+        this.updatePatient();
       }
     },
     validateCPF(cpf) {
