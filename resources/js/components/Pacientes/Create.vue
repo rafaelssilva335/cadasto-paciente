@@ -159,7 +159,6 @@ export default {
       }
 
       if (Object.keys(this.errors).length === 0) {
-        // Se não houver erros, submeter o formulário
         this.handleSubmit();
       }
     },
@@ -196,9 +195,6 @@ export default {
       }
 
       return true;
-    },
-    validateCNS(cns) {
-      // Lógica de validação do CNS aqui
     },
     async getAddress() {
       try {
