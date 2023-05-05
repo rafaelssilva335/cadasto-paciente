@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Patient;
 use Illuminate\Http\Request;
 use App\Http\Requests\StorePatientRequest;
+use App\Http\Requests\UpdatePatientRequest;
+use App\Models\Address;
 
 class PatientController extends Controller
 {
@@ -15,7 +17,7 @@ class PatientController extends Controller
     public function index()
     {
         $patients = Patient::with('address')->get();
-    
+
         return response()->json($patients);
     }
 
@@ -32,20 +34,38 @@ class PatientController extends Controller
      */
     public function store(StorePatientRequest $request)
     {
-        $validatedData = $request->validated();
+        $validatedPatientData = $request->validated();
 
+        // Validação dos dados do endereço
+        $validatedAddressData = $request->validate([
+            'address.cep' => 'required|string|max:8',
+            'address.logradouro' => 'required|string|max:255',
+            'address.complemento' => 'nullable|string|max:255',
+            'address.bairro' => 'required|string|max:255',
+            'address.cidade' => 'required|string|max:255',
+            'address.uf' => 'required|string|max:2',
+        ]);
+
+        // Criação do paciente
         $patient = new Patient;
-        $patient->fill($validatedData);
+        $patient->fill($validatedPatientData);
 
         if ($request->hasFile('photo')) {
             $photo = $request->file('photo')->store('public/photos');
             $patient->photo = $photo;
         }
 
+        // Criação do endereço e associação ao paciente
+        $address = new Address;
+        $address->fill($validatedAddressData['address']);
+        $address->save();
+        
+        $patient->address_id = $address->id;
         $patient->save();
 
         return response()->json($patient, 201);
     }
+
 
     /**
      * Display the specified resource.
@@ -66,7 +86,7 @@ class PatientController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Patient $patient)
+    public function update(UpdatePatientRequest $request, Patient $patient)
     {
         $validatedData = $request->validated();
 

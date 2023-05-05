@@ -8,11 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class Address extends Model
 {
     use HasFactory;
-    
-    protected $fillable = ['cep', 'logradouro', 'complemento', 'bairro', 'localidade', 'uf'];
 
-    public function address()
+    protected $fillable = [
+        'cep',
+        'logradouro', 
+        'complemento', 
+        'bairro', 
+        'cidade',
+        'localidade', 
+        'uf'
+    ];
+
+    public function patient()
     {
-        return $this->belongsTo(Address::class);
+        return $this->belongsTo(Patient::class);
     }
 }
