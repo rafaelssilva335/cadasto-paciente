@@ -85,14 +85,10 @@
 </template>
   
 <script>
-import CreateAddress from '@/components/Address/Create.vue';
 import axios from 'axios';
 import {mask} from 'vue-the-mask'
 
 export default {
-  components: {
-    CreateAddress
-  },
   directives: {mask},
   data() {
     return {
@@ -114,7 +110,7 @@ export default {
     };
   },
   methods: {
-    handleSubmit() {
+    updatePatient() {
       axios
         .post(`${this.baseUrl}/api/patients`, {
           name: this.name,
@@ -162,7 +158,7 @@ export default {
       }
 
       if (Object.keys(this.errors).length === 0) {
-        this.handleSubmit();
+        this.updatePatient();
       }
     },
     validateCPF(cpf) {
