@@ -122,12 +122,12 @@ export default {
         })
         .then(response => {
           console.log(response)
-          alert('Paciente cadastrado com sucesso!')
+          alert('Paciente atualizado com sucesso!')
           window.location.href = '/'
         })
         .catch(error => {
           console.error(error)
-          alert('Erro ao cadastrar o paciente!')
+          alert('Erro ao atualizar o paciente!')
         })
     },
     validateForm() {

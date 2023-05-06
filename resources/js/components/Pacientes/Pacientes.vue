@@ -6,6 +6,8 @@
       <a href="/pacientes/create" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
         Novo Paciente
       </a>
+      <a href="#" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded" @click.prevent="$inertia.post('/logout')">Logout</a>
+
     </div>
 
     <div class="flex flex-col mt-4 px-4">

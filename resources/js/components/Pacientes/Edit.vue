@@ -122,8 +122,6 @@ export default {
       errors: {},
       baseUrl: this.$page.props.baseUrl
     };
-  },
-  methods: {
-  },
+  }
 };
 </script>
