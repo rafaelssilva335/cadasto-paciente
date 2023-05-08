@@ -11,7 +11,7 @@
 ## Instalação
 
 1. Clone o repositório:
-git clone [https://github.com/seu-usuario/nome-do-repositorio.git](https://github.com/rafaelssilva335/cadastro-paciente/)
+git clone https://github.com/rafaelssilva335/cadastro-paciente
 
 2. Instale as dependências do Laravel:
 composer install
