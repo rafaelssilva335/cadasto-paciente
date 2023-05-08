@@ -3,11 +3,13 @@
   <div class="flex flex-col w-full h-full">
     <div class="flex flex-row justify-between bg-gray-200 p-4">
       <h2 class="text-2xl font-bold">Home</h2>
-      <a href="/pacientes/create" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
-        Novo Paciente
-      </a>
-      <a href="#" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded" @click.prevent="$inertia.post('/logout')">Logout</a>
-
+      <div class="flex flex-row gap-10">
+        <a href="/pacientes/create" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+          Novo Paciente
+        </a>
+        <a href="#" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
+          @click.prevent="$inertia.post('/logout')">Logout</a>
+      </div>
     </div>
 
     <div class="flex flex-col mt-4 px-4">
