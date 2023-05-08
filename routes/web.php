@@ -13,15 +13,12 @@ use App\Http\Controllers\PacienteController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/pacientes/create', [PacienteController::class, 'create'])->name('pacientes.create');
-Route::post('/pacientes', [PacienteController::class, 'store'])->name('pacientes.store');
-Route::get('/', [PacienteController::class, 'index'])->name('pacientes.index');
-Route::get('/pacientes/edit/{patient}', [PacienteController::class, 'edit'])->name('pacientes.edit');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/pacientes/create', [PacienteController::class, 'create'])->name('pacientes.create');
+    Route::post('/pacientes', [PacienteController::class, 'store'])->name('pacientes.store');
+    Route::get('/', [PacienteController::class, 'index'])->name('pacientes.index');
+    Route::get('/pacientes/edit/{patient}', [PacienteController::class, 'edit'])->name('pacientes.edit');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
